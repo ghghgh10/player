@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<title>Playboy</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
+	<script src="js/listdata.js"></script>
+	<style type="text/css">
+		body,div,h1,h2,p,audio{ margin:0px; padding:0px;}
+		body{ font-family:"Poppins"; height: 100vh; }
+		.wrapper{
+			height: 100%; width: 100%;
+			background: url("images/bg4.jpg") no-repeat center;
+			background-size: cover;
+			/*background: rgb(149,149,149); 
+			background: -moz-linear-gradient(top, rgba(149,149,149,1) 0%, rgba(13,13,13,1) 46%, rgba(1,1,1,1) 50%, rgba(10,10,10,1) 53%, rgba(78,78,78,1) 76%, rgba(56,56,56,1) 87%, rgba(27,27,27,1) 100%); 
+			background: -webkit-linear-gradient(top, rgba(149,149,149,1) 0%,rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(27,27,27,1) 100%); /* Chrome10-25,Safari5.1-6 
+			background: linear-gradient(to bottom, rgba(149,149,149,1) 0%,rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(27,27,27,1) 100%); W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			display: flex; align-items: center; justify-content: center; 
+			user-select: none; /* auto(default),all(클릭으로 선택),none,text:글자 선택 가능 */
+
+			
+			}
+			.play-body{
+				width: 52%; height:20%; background: #333; 
+				padding: 25px 35px; border-radius: 15px;
+				box-shadow:3px 4px 8px 0px rgba(0,0,0,0.3);
+				/*border: 10px solid #fff;*/
+				color: #fff;
+				transform-style: preserve-3d;
+				transform: rotateX(2deg) rotateY(19deg) rotateZ(-15deg);
+
+				position: absolute; left: 18%; top: 35%;
+
+
+			}
+			.p-top{
+				margin-bottom: 25px;
+			}
+			.p-top>h2{
+				font-size: 10px; font-weight: 800; color: #fff; text-align: center;
+				background: rgb(246,248,249); /* Old browsers */
+				background: -moz-linear-gradient(top, rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(215,222,227,1) 51%, rgba(245,247,249,1) 100%); /* FF3.6-15 */
+				background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient(to bottom, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				background-clip: text;
+				-webkit-background-clip: text;
+				color: transparent;
+				position: fixed; top: 0px; left: 40%;
+			}
+			.p-img{
+				width: 100%; height: 60%; border-radius: 15px;
+				overflow: hidden;  
+			}
+			.p-img>img{
+				width: 100%; height: 100%; 
+				object-fit: contain; margin-left: 5px;
+				/* 
+				fill(비율 유지없이 가득 채움, 
+				contain(비율유지,전체이미지),
+				cover(비율유지 가득채움),none(크기조절 없음), 
+				scale-down(none,contain중 크기 작은값) */ 
+				/* object-position: center bottom;  left,center,right,center,bottom % px*/
+			}
+			.p-info{
+				font-size: 10px; margin: 5px; text-align: center; margin-left: 30px;
+			}
+			.p-info>.artist{
+				font-size: 8px; color: #959595; font-weight: 500;
+			}
+			.p-progress{
+				height: 6px; width: 100%; border-radius: 3px; background: #e0e0e0;
+			}
+			.p-progress .bar{
+				height: inherit; width: 0%;/*0%*/ border-radius: inherit;
+				background: #230975; 
+			}
+			.p-progress .timer{
+				margin-top: -25px; display: flex; justify-content: space-between;
+				font-size: 14px; color: #5d5d5d;
+			}
+			.p-control{
+				 display: flex; 
+				justify-content: space-between;
+				align-items: center;
+				position: fixed; top: 10%;
+				width: 80%;
+				font-size: 14px;
+			}
+			.p-control span{
+				font-size: 18px;
+			}
+			.p-control .play-pause{
+				width: 24px; height: 24px; background: #999; border-radius: 27px;
+				display: flex; justify-content: center; align-items: center;
+			}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="play-body">
+			<div class="p-top">
+			<h2>Play Boy</h2></div>
+			<div class="p-img">
+			<img src="images/album1.jpg" alt="앨범1">
+			</div>
+			<div class="p-info">
+				<p class="name">Alone</p>
+				<p class="artist">Color out</p>
+			</div>
+			<div class="p-progress">
+				<div class="bar"><audio id="main-audio" src=""></audio> </div>
+				<div class="timer">
+					<span class="current">0:00</span>
+					<span class="duration">0:00</span>
+				</div>
+			</div>
+			<div class="p-control">
+			<span id="repeat-btn" class="material-icons">repeat</span>
+			<span id="prev-btn" class="material-icons">skip_previous</span>
+			<div class="play-pause">
+				<span id="play_btn" class="material-icons">play_arrow</span><!--  pause -->
+			</div>
+			<span id="next_btn" class="material-icons">skip_next</span>
+			<span id="list_btn" class="material-icons">queue_music</span>
+			</div>
+		</div>
+	</div>
+	<script>
+				const musicWrap=document.querySelector(".wrapper");
+		const musicAudio=musicWrap.querySelector("#main-audio");
+		const playBtn=musicWrap.querySelector("#play_btn");
+		const musicPlay=()=>{
+			playBtn.innerHTML="pause"; // musicWrap.querySelector("#play-btn img").src="~.svg"
+			musicAudio.play();
+		}
+		const musicPause=()=>{
+			playBtn.innerHTML="play_arrow";
+			musicAudio.pause();
+		}
+		playBtn.addEventListener("click",()=>{
+			let getText=playBtn.innerText;console.log(getText);
+			(getText=="pause")? musicPause() : musicPlay();
+			/*(playBtn.innerText=="pause")? musicPause() : musicPlay();*/
+		}); 
+
+		let list_index=0; // musicList[0] --> musicList[5] 순번 호출
+		const albumImg=musicWrap.querySelector(".p-img>img");
+		const p_name=musicWrap.querySelector(".name");
+		const p_artist=musicWrap.querySelector(".artist"); // musicAudio
+		const loadMusic=(num)=>{
+			albumImg.src=`images/${musicList[num].img}.jpg`;     // img 경로
+			musicAudio.src=`songs/${musicList[num].audio}.mp3`; // audio 경로
+			p_name.innerText=musicList[num].name;              // name 글자정보
+			p_artist.innText=musicList[num].artist;           // artist 글자정보
+			// img 경로
+			// audio 경로
+			// name 글자정보
+			// artist 글자정보
+			
+		}
+
+		window.addEventListener("load",()=>{
+			loadMusic(list_index);
+		});
+
+		const prevBtn=musicWrap.querySelector("#prev-btn");
+		const nextBtn=musicWrap.querySelector("#next_btn");
+		const prevMusic=()=>{
+			list_index--;
+			if(list_index<0){ list_index=musicList.length-1;}
+			loadMusic(list_index);
+			musicPlay();
+
+		}
+		const nextMusic=()=>{
+			list_index++;
+			if(list_index>=musicList.length){ list_index=0;}
+			/*(list_index>=musicList.length)?  list_index=0:list_index=list_index;*/
+			loadMusic(list_index);
+			musicPlay();
+		}
+		prevBtn.addEventListener("click",()=>{ prevMusic();});
+		nextBtn.addEventListener("click",()=>{ nextMusic();});
+		const progressive=musicWrap.querySelector(".p-progress");
+		const progressBar=progressive.querySelector(".bar");
+		const playTime=progressive.querySelector(".current");
+		const totalTime=progressive.querySelector(".duration");
+		// this, event.target , event.currentTarger
+		musicAudio.addEventListener("timeupdate",(event)=>{
+			let current=event.target.currentTime;
+			let duration=event.target.duration;
+			let progressRatio=(current/duration)*100;
+			progressBar.style.width=`${progressRatio}%`; // progressRatio+"%"
+			// 재생시간 표시
+			// 진행봐 넓이 지정
+			let currentMin=Math.floor(current/60);
+			let currentSec=Math.floor(current%60);
+			if(currentSec<10){ currentSec=`0${currentSec}`; }
+				playTime.innerHTML=`${currentMin}:${currentSec}`;
+
+			musicAudio.addEventListener("loadedata",()=>{
+				let tatalDuration=musicAudio.duration; console.log(totalDuration,duration);
+				let totalMin=Math.floor(totalDuration/60);
+				let totalSec=Math.floor(totalDuration%60);
+				if(totalSec<10){ totalSec=`0${totalSec}`; }// "0"+tatalSec
+				totalTime.innerHTML=`${totalMin}:${totalSec}`;
+				//전체 시간표시
+			});
+		});
+		/*
+		obj.clientWidth, .clientHeight( padding 포함 크기 인식)
+		obj.offsetWidth, .offsetHeight( border 포함 크기 인식, 자식 요소 크기 포함 인식)
+		obj.getBoundingClientRect() -- .width, .height, (boder+padding 포함, 소수표기 가능성)
+		*/
+		progressive.addEventListener("click",(e)=>{
+			let maxWidth=progressive.clientWidth;
+			let clickXposition=e.offsetX;
+			let totalDuration=musicAudio.duration;
+			musicAudio.currentTime=(clickXposition/maxWidth)*totalDuration;
+			musicPlay();
+
+		});
+		const mRepeat=musicWrap.querySelector("#repeat-btn");
+		musicAudio.addEventListener("ended",()=>{
+			let getText=mRepeat.innerText;
+			if(getText=="repeat"){ nextMusic} // repeat, repeat-one, shuffle 구분용 조건문
+		});
+		
+	</script>
+</body>
+</html>
